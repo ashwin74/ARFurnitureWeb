@@ -44,31 +44,41 @@
                 <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
             </div>
             </div>
-            <div class="form-group">
+            <div class="form-row">
+                <div class="form-group col-md-8">
                 <label for="inputAddress">Address</label>
                 <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+                </div>
+                <div class="form-group col-md-4">
+                <label for="inputUser">User Type</label>
+                <select id="inputUser" class="form-control">
+                    <option selected>Select User Type</option>
+                    <option>Admin</option>
+                    <option>User</option>
+                </select>
+                </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-3">
                     <label for="inputCity">Mobile Number</label>
-                    <input type="tel" class="form-control" id="inputNumber">
+                    <input type="tel" class="form-control" id="inputNumber" placeholder="Mobile Number">
                 </div>
                 <div class="form-group col-md-4">
                    <label for="inputCity">City</label>
-                   <input type="text" class="form-control" id="inputCity">
+                   <input type="text" class="form-control" id="inputCity" placeholder="City">
                 </div>
                 <div class="form-group col-md-3">
                     <label for="inputState">State</label>
                     <select id="inputState" class="form-control">
                       <option selected>Select State</option>
-                      <option>Kannur</option>
-                      <option>Mumbai</option>
-                      <option>Delhi</option>
+                      <option>Kerala</option>
+                      <option>Maharashtra</option>
+                      <option>Karnataka</option>
                     </select>
                 </div>
                 <div class="form-group col-md-2">
                     <label for="inputZip">Zip Code</label>
-                    <input type="text" class="form-control" id="inputZip">
+                    <input type="text" class="form-control" id="inputZip" placeholder="Zip Code">
                 </div>
             </div>
             <button type="submit" class="btn btn-primary">Sign Up</button>
