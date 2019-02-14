@@ -14,31 +14,48 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-    <title>AR Furniture Shop</title>
+    <title>View Items</title>
   </head>
   <body>
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">AR Furniture Shop</a>
+    </nav>
     <div class="container">
-        <h1 style="margin-top: 2%; margin-bottom: 2%;" class="text-center">Items</h1>
+        <h1 style="margin-top: 2%; margin-bottom: 2%;" class="text-center">View Items</h1>
         <table class="table table-hover">
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">Id</th>
                     <th scope="col">Item Name</th>
+                    <th scope="col">Item Description</th>
                     <th scope="col">Category</th>
                     <th scope="col">Item Price</th>
                     <th scope="col">Item Image Url</th>
+                    <th scope="col">Select Item</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <th scope="row">1</th>
                     <td>Italian Sofa</td>
+                    <td>description</td>
                     <td>Sofa</td>
                     <td>23000</td>
                     <td>url</td>
+                    <th><div class="input-group">
+      <input type="checkbox" aria-label="Checkbox for following text input">
+    </div></th>
                 </tr>
             </tbody>
         </table>
+        <div class="row">
+            <div class="col-6">
+                <button type="button" class="btn btn-danger text-center btn-block btn-lg">Delete Item</button>
+            </div>
+            <div class="col-6">
+                <button type="button" class="btn btn-success text-center btn-block btn-lg">Add Item</button>
+            </div>
+        </div>
     </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

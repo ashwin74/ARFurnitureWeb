@@ -1,6 +1,6 @@
 <%-- 
-    Document   : review
-    Created on : Jan 5, 2019, 12:45:17 PM
+    Document   : order
+    Created on : Jan 5, 2019, 12:44:22 PM
     Author     : Ashwin
 --%>
 
@@ -14,31 +14,39 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-    <title>Review</title>
+    <title>Orders</title>
   </head>
   <body>
-      <nav class="navbar navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">AR Furniture Shop</a>
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">View Orders</a>
     </nav>
     <div class="container">
-        <h1 style="margin-top: 2%; margin-bottom: 2%;" class="text-center">User Reviews</h1>
+        <div class="row" style="margin: 20px;">
+            <h3>User Name</h3>
+            <span><h3 style="display:inline"> | </h3><span>
+            <h3 style="display:inline">Mobile No</h3>
+        </div>
         <table class="table table-hover">
             <thead class="thead-dark">
                 <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">date</th>
-                    <th scope="col">Review</th>
-                    <th scope="col">User</th>
-                    <th scope="col">Rating</th>
+                    <th scope="col">Sl No.</th>
+                    <th scope="col">Item Name</th>
+                    <th scope="col">Category Name</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Total</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <th scope="row">1</th>
-                    <td>7-7-7</td>
-                    <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi, culpa.</td>
-                    <td>Ash</td>
+                    <th>1</th>
+                    <td>Italian Sofa</td>
+                    <td>Sofa</td>
+                    <td>image</td>
                     <td>4</td>
+                    <td>2000</td>
+                    <td>8000</td>
                 </tr>
             </tbody>
         </table>

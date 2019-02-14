@@ -14,9 +14,12 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-    <title>AR Furniture Shop</title>
+    <title>Review</title>
   </head>
   <body>
+      <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">AR Furniture Shop</a>
+    </nav>
     <div class="container">
         <h1 style="margin-top: 2%; margin-bottom: 2%;" class="text-center">User Reviews</h1>
         <table class="table table-hover">

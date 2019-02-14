@@ -20,21 +20,20 @@
     
     <nav class="navbar navbar-dark bg-dark">
       <a class="navbar-brand" href="#">AR Furniture Shop</a>
-      <a href="signup.jsp"><button type="button" class="btn btn-success">Sign Up</button></a>
     </nav>
 
     <div class="container row">
       <div class="col-md-6 offset-md-4">
-        <form style="margin-top:20%;">
+          <form method="post" style="margin-top:20%;">
           <div class="form-group">
-            <label for="exampleInputEmail1">Email</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email" name="email">
           </div>
           <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" placeholder="Password" name="password">
           </div>
-          <button type="submit" class="btn btn-primary">Sign In</button>
+              <button type="submit" name="signin" class="btn btn-primary">Sign In</button>
         </form>
       </div>
     </div>
@@ -45,3 +44,13 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
   </body>
 </html>
+<%
+if(request.getParameter("signin")!=null)
+{
+    String email=request.getParameter("email");
+    String password=request.getParameter("password");
+    out.print(email);
+    out.print(password);
+}
+
+%>

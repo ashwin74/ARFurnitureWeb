@@ -14,34 +14,33 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-    <title>AR Furniture Shop</title>
+    <title>Orders</title>
   </head>
   <body>
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">AR Furniture Shop</a>
+    </nav>
     <div class="container">
         <h1 style="margin-top: 2%; margin-bottom: 2%;" class="text-center">Orders</h1>
         <table class="table table-hover">
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">Id</th>
-                    <th scope="col">Item</th>
-                    <th scope="col">Item Quantity</th>
                     <th scope="col">User</th>
                     <th scope="col">Order Date</th>
-                    <th scope="col">Price</th>
                     <th scope="col">Total Price</th>
                     <th scope="col">Order Status</th>
+                    <th scope="col">View More</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <th scope="row">1</th>
-                    <td>Italian Sofa</td>
-                    <td>4</td>
                     <td>Ash</td>
                     <td>7-7-7</td>
-                    <td>23000</td>
                     <td>92000</td>
                     <td>Success</td>
+                    <td scope="col"><button type="button" class="btn btn-warning">View More</button></td>
                 </tr>
             </tbody>
         </table>
