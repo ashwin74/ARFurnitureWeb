@@ -1,53 +1,88 @@
 <%-- 
-    Document   : order
+    Document   : userOrder
     Created on : Jan 5, 2019, 12:44:22 PM
     Author     : Ashwin
 --%>
 
+<%@page import="java.sql.ResultSet"%>
+<%@page import="dbpackage.dbquery"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!doctype html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-    <title>User Order</title>
+    <title>AR Furniture Shop | View More</title>
 </head>
+
 <body>
       
     <nav class="navbar navbar-dark bg-dark">
-        <a class="navbar-brand mx-auto" style="width: 200px;" href="#">AR Furniture Shop</a>
+        <a class="navbar-brand mx-auto" style="width: 200px;" href="dashboard.jsp">AR Furniture Shop</a>
     </nav>
       
     <div class="container">
         
+        <%
+        String mid=request.getParameter("mid");
+        String ulid=request.getParameter("ulid");
+            dbquery db=new dbquery();
+            ResultSet rs=db.view_userOne(ulid);
+            if(rs.next())
+            {
+        %>
+        
         <div style="margin: 20px;">
-            <h3>User Name: Ashwin</h3>
-            <h5>Phone Number: 7777777777</h5>
+            <h3>User Name: <%=rs.getString("firstname")%></h3>
+            <h5>Phone Number: <%=rs.getString("mobileno")%></h5>
         </div>
         
-        <table class="table table-hover">
+        <% }
+        else{
+                out.print("Error Fetching User Details");
+            }
+        %>
+        
+        <table class="table table-hover" style="margin-bottom: 5%;">
+            
             <thead class="thead-dark">
                 <tr>
-                    <th scope="col">Sl No.</th>
-                    <th scope="col">Item Name</th>
-                    <th scope="col">Category Name</th>
-                    <th scope="col">Image</th>
-                    <th scope="col">Quantity</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Total</th>
+                    <th>Sl No.</th>
+                    <th>Item Name</th>
+                    <th>Category Name</th>
+                    <th>Image</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Total</th>
                 </tr>
             </thead>
+            
             <tbody>
+                
+                 <%
+                     int i=1;
+                     ResultSet res=db.view_user_order(mid);
+                     while(res.next())
+                     {
+                         int quantity=res.getInt("itemquantity");
+                         int itemprice=res.getInt("itemprice");
+                         int totalprice = quantity * itemprice;
+                 %>
+                
                 <tr>
-                    <th>1</th>
-                    <td>Italian Sofa</td>
-                    <td>Sofa</td>
+                    <th><%= i++ %></th>
+                    <td><%= res.getString(7) %></td>
+                    <td><%= res.getString("categoryname") %></td>
                     <td>image</td>
-                    <td>4</td>
-                    <td>2000</td>
-                    <td>8000</td>
+                    <td><%= res.getString("itemquantity") %></td>
+                    <td><%= res.getString("itemprice") %></td>
+                    <td><%= totalprice+"" %></td>
                 </tr>
+                
+                <% } %>
+               
             </tbody>
         </table>
         

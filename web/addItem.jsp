@@ -1,42 +1,44 @@
 <%-- 
-    Document   : addItemForm
+    Document   : addItem
     Created on : Feb 14, 2019, 10:22:21 AM
     Author     : Ashwin
 --%>
 
+<%@page import="dbpackage.dbquery"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-    <title>Add Products</title>
+    <title>AR Furniture Shop | Add Item</title>
 </head>
 <body>
     
-    <!--    navbar-->
     <nav class="navbar navbar-dark bg-dark">
-        <a class="navbar-brand mx-auto" style="width: 200px;" href="#">AR Furniture Shop</a>
+        <a class="navbar-brand mx-auto" href="dashboard.jsp">AR Furniture Shop</a>
     </nav>
     
     <div class="container">
-        <h1 class="text-center" style="margin-top: 10px;">Add Product</h1>
-        <form>
+        
+        <h1 class="text-center" style="margin-top: 20px;">Add Item</h1>
+        
+        <form action="file_upload_update.jsp" method="post" enctype="multipart/form-data">
             
-            <div class="form-row">
-                <div class="form-group col-md-12">
-                    <label for="itemname">Product Name</label>
-                    <input type="text" class="form-control" id="itemname" placeholder="Product Name" name="itemname">
-                </div>
-                <div class="form-group col-md-12">
-                    <label for="itemdescription">Description</label>
-                    <textarea class="form-control" aria-label="With textarea" placeholder="Product Description" name="itemdescription"></textarea>
-                </div>
+            <div class="form-group">
+                <label for="itemname">Item Name</label>
+                <input type="text" class="form-control" placeholder="Item Name" name="itemname">
+            </div>
+                
+            <div class="form-group">
+                <label for="itemdescription">Description</label>
+                <textarea class="form-control" placeholder="Item Description" name="itemdescription"></textarea>
             </div>
             
             <div class="row">
-                <div class="form-group col-sm-6">
+                <div class="form-group col-md-6">
                     <label>Category</label>
                     <select class="custom-select" name="category">
                         <option selected disabled>Select Category</option>
@@ -44,27 +46,29 @@
                         <option value="2">Bed</option>
                         <option value="3">Chair</option>
                         <option value="4">Table</option>
-                    </select>
+                    </select>    
                 </div>
-                <div class="form-group col-sm-6">
+
+                <div class="form-group col-md-6">
                     <label for="price">Price</label>
-                    <input type="text" class="form-control" id="price" placeholder="Price" name="price">
+                    <input type="number" class="form-control" placeholder="Price" name="price">
                 </div>
             </div>
-            
-            <div>
-                <label>Select Image</label>
+                
+            <div class="form-group">
+                <label>Select Item Image</label>
                 <div class="input-group mb-3">
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="inputFile">
-                        <label class="custom-file-label" for="inputFile" aria-describedby="inputGroupFileAddon">Choose file</label>
+                        <input type="file" class="custom-file-input" name="itemurl">
+                        <label class="custom-file-label" for="itemurl">Choose file</label>
                     </div>
                 </div>
-            </div>
+            </div>            
             
-            <button type="button" class="btn btn-primary btn-lg btn-block" name="additem">Add Product</button>
+            <button style="margin-top: 40px;margin-bottom: 4%;" type="submit" class="btn btn-info btn-lg btn-block" name="additem">Add Item</button>
             
         </form>
+        
     </div>
     
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -73,18 +77,3 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 </body>
 </html>
-
-<%
-if(request.getParameter("additem")!=null)
-{
-    String itemName=request.getParameter("itemname");
-    String description=request.getParameter("description");
-    String price=request.getParameter("price");
-    String category=request.getParameter("category");
-    out.print(itemName);
-    out.print(description);
-    out.print(price);
-    out.print(category);    
-}
-
-%>

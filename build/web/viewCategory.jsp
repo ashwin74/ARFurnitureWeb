@@ -1,5 +1,5 @@
 <%-- 
-    Document   : review
+    Document   : viewCategory
     Created on : Jan 5, 2019, 12:45:17 PM
     Author     : Ashwin
 --%>
@@ -14,53 +14,49 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-    <title>AR Furniture Shop | Review</title>
+    <title>AR Furniture Shop | View Category</title>
 </head>
-
 <body>
     
     <nav class="navbar navbar-dark bg-dark">
         <a class="navbar-brand mx-auto" href="dashboard.jsp">AR Furniture Shop</a>
     </nav>
     
-    <div class="container">
+    <div class="container" style="margin-bottom: 4%;">
         
-        <h1 style="margin-top: 2%; margin-bottom: 2%;" class="text-center">User Reviews</h1>
+        <h1 style="margin-top: 2%; margin-bottom: 2%;" class="text-center">Categories</h1>
         
         <table class="table table-hover">
             
             <thead class="thead-dark">
                 <tr>
-                    <th>Sl No.</th>
-                    <th>Date</th>
-                    <th>Review</th>
-                    <th>User</th>
-                    <th>Rating</th>
+                    <th scope="col">Sl No</th>
+                    <th scope="col">category name</th>
+                    <th scope="col">Edit Category</th>
+                    <th scope="col">Delete Category</th>
                 </tr>
             </thead>
             
             <tbody>
-                
-                <%
-                    dbquery db=new dbquery();
-                    int i=1;
-                    ResultSet res=db.view_review();
-                    while(res.next())
-                    {   
-                %>
-                
                 <tr>
+                    
+                    <%
+                        dbquery db=new dbquery();
+                        int i=1;
+                        ResultSet res=db.view_category();
+                        while(res.next())
+                        {
+                    %>
+                    
                     <th><%= i++ %></th>
-                    <td><%= res.getString("postdate") %></td>
-                    <td><%= res.getString("review") %></td>
-                    <td><%= res.getString("firstname") %></td>
-                    <td><%= res.getString("rating") %></td>
+                    <td><%= res.getString("categoryname") %></td>
+                    <td><button class="btn btn-primary"><a href=""></a>Edit Category</button></td>
+                    <td><button class="btn btn-warning"><a href=""></a>Delete Category</button></button></td>
                 </tr>
                 
                 <% } %>
                 
             </tbody>
-            
         </table>
         
     </div>

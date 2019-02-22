@@ -4,19 +4,23 @@
     Author     : Ashwin
 --%>
 
+<%@page import="java.sql.ResultSet"%>
+<%@page import="dbpackage.dbquery"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!doctype html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-    <title>Review</title>
+    <title>AR Furniture Shop | Review</title>
 </head>
+
 <body>
     
     <nav class="navbar navbar-dark bg-dark">
-        <a class="navbar-brand mx-auto" style="width: 200px;" href="#">AR Furniture Shop</a>
+        <a class="navbar-brand mx-auto" href="dashboard.jsp">AR Furniture Shop</a>
     </nav>
     
     <div class="container">
@@ -24,24 +28,39 @@
         <h1 style="margin-top: 2%; margin-bottom: 2%;" class="text-center">User Reviews</h1>
         
         <table class="table table-hover">
+            
             <thead class="thead-dark">
                 <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">date</th>
-                    <th scope="col">Review</th>
-                    <th scope="col">User</th>
-                    <th scope="col">Rating</th>
+                    <th>Sl No.</th>
+                    <th>Date</th>
+                    <th>Review</th>
+                    <th>User</th>
+                    <th>Rating</th>
                 </tr>
             </thead>
+            
             <tbody>
+                
+                <%
+                    dbquery db=new dbquery();
+                    int i=1;
+                    ResultSet res=db.view_review();
+                    while(res.next())
+                    {   
+                %>
+                
                 <tr>
-                    <th scope="row">1</th>
-                    <td>7-7-7</td>
-                    <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi, culpa.</td>
-                    <td>Ash</td>
-                    <td>4</td>
+                    <th><%= i++ %></th>
+                    <td><%= res.getString("postdate") %></td>
+                    <td><%= res.getString("review") %></td>
+                    <td><%= res.getString("firstname") %></td>
+                    <td><%= res.getString("rating") %></td>
                 </tr>
+                
+                <% } %>
+                
             </tbody>
+            
         </table>
         
     </div>

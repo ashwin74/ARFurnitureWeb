@@ -4,37 +4,42 @@
     Author     : Ashwin
 --%>
 
+<%@page import="java.sql.ResultSet"%>
+<%@page import="dbpackage.dbquery"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-  <title>AR Furniture Shop | Sign In</title>
+  <title>AR Furniture | Admin | Sign In</title>
 </head>
+
 <body>
-<!--    navbar-->
+    
     <nav class="navbar navbar-dark bg-dark">
-      <a class="navbar-brand mx-auto" style="width: 200px;" href="#">AR Furniture Shop</a>
+      <a class="navbar-brand mx-auto" href="#">AR FURNITURE SHOP</a>
     </nav>
 
-````<h1 class="text-center">Admin Sign In</h1>
+    <h1 class="text-center" style="margin-top:20px;">Admin Sign In</h1>
 
-<!--    sign in-->
     <div class="container row">
         <div class="col-md-6 offset-md-4">
-            <form style="margin-top: 10%;" method="post">
+            
+            <form style="margin-top:20px;" method="post">
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email" name="email">
+                    <input type="email" class="form-control"  placeholder="Admin Email ID" name="email">
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" class="form-control" id="password" placeholder="Password" name="password">
+                    <input type="password" class="form-control" placeholder="Password" name="password">
                 </div>
-                <button type="submit" name="signin" class="btn btn-primary">Sign In</button>
+                <button type="submit" name="signin" class="btn btn-success btn-block btn-lg" style="margin-top:30px;">Sign In</button>
             </form>
+            
         </div>
     </div>
 
@@ -45,13 +50,26 @@
 </body>
 </html>
 
-
+<!--Sign In-->
 <%
 if(request.getParameter("signin")!=null)
 {
     String email=request.getParameter("email");
     String password=request.getParameter("password");
-    out.print(email);
-    out.print(password);
+    dbquery db=new dbquery();
+    ResultSet res = db.login(email,password);
+    if(res.next())
+    {
+        String lid = res.getString("loginid");
+        String type = res.getString("usertype");
+        if(type.equalsIgnoreCase("admin"))
+        {
+            response.sendRedirect("dashboard.jsp");
+        }
+    } else {
+        %>
+        <script>alert("Invalid Admin ID or Password");</script>
+        <%
+    }
 }
 %>

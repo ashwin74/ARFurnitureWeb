@@ -1,5 +1,5 @@
 <%-- 
-    Document   : review
+    Document   : userdetail
     Created on : Jan 5, 2019, 12:45:17 PM
     Author     : Ashwin
 --%>
@@ -7,14 +7,13 @@
 <%@page import="java.sql.ResultSet"%>
 <%@page import="dbpackage.dbquery"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
 <!doctype html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-    <title>AR Furniture Shop | Review</title>
+    <title>AR Furniture Shop | User Details</title>
 </head>
 
 <body>
@@ -25,17 +24,21 @@
     
     <div class="container">
         
-        <h1 style="margin-top: 2%; margin-bottom: 2%;" class="text-center">User Reviews</h1>
+        <h1 style="margin-top: 2%; margin-bottom: 2%;" class="text-center">User Details</h1>
         
         <table class="table table-hover">
             
             <thead class="thead-dark">
                 <tr>
-                    <th>Sl No.</th>
-                    <th>Date</th>
-                    <th>Review</th>
-                    <th>User</th>
-                    <th>Rating</th>
+                    <th>Sl No</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Mobile No</th>
+                    <th>House Name</th>
+                    <th>City</th>
+                    <th>State</th>
+                    <th>Zip Code</th>
                 </tr>
             </thead>
             
@@ -44,17 +47,21 @@
                 <%
                     dbquery db=new dbquery();
                     int i=1;
-                    ResultSet res=db.view_review();
+                    ResultSet res=db.view_user();
                     while(res.next())
-                    {   
+                    {
                 %>
                 
                 <tr>
                     <th><%= i++ %></th>
-                    <td><%= res.getString("postdate") %></td>
-                    <td><%= res.getString("review") %></td>
                     <td><%= res.getString("firstname") %></td>
-                    <td><%= res.getString("rating") %></td>
+                    <td><%= res.getString("lastname") %></td>
+                    <td><%= res.getString("email") %></td>
+                    <td><%= res.getString("mobileno") %></td>
+                    <td><%= res.getString("housename") %></td>
+                    <td><%= res.getString("city") %></td>
+                    <td><%= res.getString("state") %></td>
+                    <td><%= res.getString("zipcode") %></td>
                 </tr>
                 
                 <% } %>

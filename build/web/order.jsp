@@ -4,26 +4,30 @@
     Author     : Ashwin
 --%>
 
+<%@page import="java.sql.ResultSet"%>
+<%@page import="dbpackage.dbquery"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!doctype html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-    <title>Product Orders</title>
+    <title>AR Furniture Shop | Orders</title>
 </head>
 <body>
-<!--    navbar-->
+    
     <nav class="navbar navbar-dark bg-dark">
-        <a class="navbar-brand mx-auto" style="width: 200px;" href="#">AR Furniture Shop</a>
+        <a class="navbar-brand mx-auto" href="dashboard.jsp">AR Furniture Shop</a>
     </nav>
 
-    <div class="container">
+    <div class="container" style="margin-bottom: 4%;">
         
-        <h1 style="margin-top: 2%; margin-bottom: 2%;" class="text-center">Product Orders</h1>
+        <h1 style="margin-top: 2%; margin-bottom: 2%;" class="text-center">Orders</h1>
         
         <table class="table table-hover">
+            
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">Sl No</th>
@@ -31,19 +35,37 @@
                     <th scope="col">Order Date</th>
                     <th scope="col">Total Price</th>
                     <th scope="col">Order Status</th>
-                    <th scope="col">View More</th>
+                    <th scope="col">More</th>
                 </tr>
             </thead>
+            
             <tbody>
+                
+                <%
+                    dbquery db=new dbquery();
+                    int i=1;
+                    ResultSet res=db.view_order();
+                    while(res.next())
+                    {
+                %>
+                
                 <tr>
-                    <th scope="row">1</th>
-                    <td>Ash</td>
-                    <td>7-7-7</td>
-                    <td>92000</td>
-                    <td>Success</td>
-                    <td scope="col"><button type="button" class="btn btn-warning">View More</button></td>
+                    <th><%= i++ %></th>
+                    <td><%= res.getString("userdetails.firstname") %></td>
+                    <td><%= res.getString("ordermaster.orderdate") %></td>
+                    <td><%= res.getString("ordermaster.totalprice") %></td>
+                    <td><%= res.getString("ordermaster.orderstatus") %></td>
+                    <td>
+                        <a href="userOrder.jsp?mid=<%= res.getString("ordermaster.ordermasterid") %>&ulid=<%=res.getString("loginid")%>">
+                            <button type="button" class="btn btn-warning">View More</button>
+                        </a>
+                    </td>
                 </tr>
+                
+                <% } %>
+                
             </tbody>
+            
         </table>
         
     </div>
