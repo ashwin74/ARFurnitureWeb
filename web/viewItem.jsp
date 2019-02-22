@@ -67,7 +67,7 @@
                     <th><%= i++ %></th>
                     <td><%= res.getString("itemname") %></td>
                     <td><%= res.getString("itemdescription") %></td>
-                    <td><%= res.getString("itemname") %></td>
+                    <td><%= res.getString("categoryname") %></td>
                     <td><%= res.getString("itemprice") %></td>
                     <td><%= res.getString("itemurl") %></td>
                     <td>

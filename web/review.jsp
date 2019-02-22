@@ -32,9 +32,10 @@
             <thead class="thead-dark">
                 <tr>
                     <th>Sl No.</th>
+                    <th>Item</th>
+                    <th>User</th>
                     <th>Date</th>
                     <th>Review</th>
-                    <th>User</th>
                     <th>Rating</th>
                 </tr>
             </thead>
@@ -51,9 +52,10 @@
                 
                 <tr>
                     <th><%= i++ %></th>
+                    <td><%= res.getString("itemname") %></td>
+                    <td><%= res.getString("firstname") %></td>
                     <td><%= res.getString("postdate") %></td>
                     <td><%= res.getString("review") %></td>
-                    <td><%= res.getString("firstname") %></td>
                     <td><%= res.getString("rating") %></td>
                 </tr>
                 

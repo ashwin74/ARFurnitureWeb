@@ -75,7 +75,7 @@
                     <th><%= i++ %></th>
                     <td><%= res.getString(7) %></td>
                     <td><%= res.getString("categoryname") %></td>
-                    <td>image</td>
+                    <td><%= res.getString("itemurl") %></td>
                     <td><%= res.getString("itemquantity") %></td>
                     <td><%= res.getString("itemprice") %></td>
                     <td><%= totalprice+"" %></td>

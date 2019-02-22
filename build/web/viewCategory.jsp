@@ -19,7 +19,10 @@
 <body>
     
     <nav class="navbar navbar-dark bg-dark">
-        <a class="navbar-brand mx-auto" href="dashboard.jsp">AR Furniture Shop</a>
+        <a class="navbar-brand" href="dashboard.jsp">AR Furniture Shop</a>
+        <a style="text-decoration: none;" href="addItem.jsp">
+            <button class="btn btn-danger">Back To Add Item</button>
+        </a>
     </nav>
     
     <div class="container" style="margin-bottom: 4%;">

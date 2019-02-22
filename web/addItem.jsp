@@ -4,6 +4,7 @@
     Author     : Ashwin
 --%>
 
+<%@page import="java.sql.ResultSet"%>
 <%@page import="dbpackage.dbquery"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
@@ -18,7 +19,10 @@
 <body>
     
     <nav class="navbar navbar-dark bg-dark">
-        <a class="navbar-brand mx-auto" href="dashboard.jsp">AR Furniture Shop</a>
+        <a class="navbar-brand" href="dashboard.jsp">AR Furniture Shop</a>
+        <a style="text-decoration: none;" href="addCategory.jsp">
+            <button class="btn btn-warning">Create New Category For Items</button>
+        </a>
     </nav>
     
     <div class="container">
@@ -41,14 +45,23 @@
                 <div class="form-group col-md-6">
                     <label>Category</label>
                     <select class="custom-select" name="category">
+                        
                         <option selected disabled>Select Category</option>
-                        <option value="1">Sofa</option>
-                        <option value="2">Bed</option>
-                        <option value="3">Chair</option>
-                        <option value="4">Table</option>
+                        <%
+                            dbquery db=new dbquery();
+                            int i=1;
+                            ResultSet res=db.view_category();
+                            while(res.next())
+                            {
+                        %>
+                        
+                        <option value="<%= i++ %>"><%= res.getString("categoryname") %></option>
+                        
+                        <% } %>
+                        
                     </select>    
                 </div>
-
+                   
                 <div class="form-group col-md-6">
                     <label for="price">Price</label>
                     <input type="number" class="form-control" placeholder="Price" name="price">

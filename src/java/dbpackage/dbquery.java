@@ -62,7 +62,7 @@ public class dbquery {
     public ResultSet view_item()
     {
         try {
-            rs=st1.executeQuery("SELECT * FROM ITEM");
+            rs=st1.executeQuery("SELECT `item`.*, `category`.* FROM `item`,`category` WHERE `item`.categoryid = `category`.categoryid");
         } catch (Exception e) {
         }
         return rs;
@@ -82,7 +82,7 @@ public class dbquery {
     public ResultSet view_review()
     {
         try {
-            rs=st1.executeQuery("SELECT `review`.*,`userdetails`.firstname FROM review,userdetails WHERE review.reviewid=userdetails.userid");
+            rs=st1.executeQuery("SELECT `review`.*,`userdetails`.firstname,item.itemname FROM review,userdetails,item WHERE review.userid=userdetails.userid AND review.reviewid=item.itemid");
         } catch (Exception e) {
         }
         return rs;
@@ -102,7 +102,7 @@ public class dbquery {
     public ResultSet view_business()
     {
         try {
-            rs=st1.executeQuery("SELECT SUM(ordermaster.totalprice), COUNT(item.itemname), COUNT(userdetails.firstname), COUNT(ordermaster.orderstatus) FROM ordermaster, item, userdetails");
+            rs=st1.executeQuery("SELECT SUM(`ordermaster`.`totalprice`), COUNT(`item`.`itemid`), COUNT(`userdetails`.`userid`), COUNT(`ordermaster`.`orderstatus`) FROM `ordermaster`,`item`,`userdetails` WHERE `ordermaster`.`orderstatus`='Success'");
         } catch (Exception e) {
         }
         return rs;
