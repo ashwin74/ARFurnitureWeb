@@ -18,7 +18,8 @@
 <body>
     
     <nav class="navbar navbar-dark bg-dark">
-        <a class="navbar-brand mx-auto" href="dashboard.jsp">AR Furniture Shop</a>
+        <a class="navbar-brand" href="dashboard.jsp">AR Furniture Shop</a>
+        <a style="text-decoration: none;" href="viewCategory.jsp"><button type="button" class="btn btn-info" name="category">View Category</button></a>
     </nav>
   
     <div class="container col-md-8">
