@@ -20,7 +20,10 @@
 <body>
     
     <nav class="navbar navbar-dark bg-dark">
-      <a class="navbar-brand mx-auto" href="#">AR FURNITURE SHOP</a>
+      <a class="navbar-brand" href="#">AR FURNITURE SHOP</a>
+      <a style="text-decoration: none;" href="index.jsp">
+            <button class="btn btn-danger">Sign Out</button>
+        </a>
     </nav>
 
     <h1 class="text-center" style="margin-top: 20px;">Admin Dashboard</h1>
