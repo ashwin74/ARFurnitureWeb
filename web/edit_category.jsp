@@ -4,6 +4,7 @@
     Author     : Ashwin
 --%>
 
+<%@page import="java.sql.ResultSet"%>
 <%@page import="dbpackage.dbquery"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
   <%
@@ -16,7 +17,6 @@
       response.sendRedirect("index.jsp");
 
   %>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,18 +29,24 @@
     
     <nav class="navbar navbar-dark bg-dark">
         <a class="navbar-brand" href="dashboard.jsp">AR Furniture Shop</a>
-        <a style="text-decoration: none;" href="viewCategory.jsp"><button type="button" class="btn btn-info" name="category">View Category</button></a>
     </nav>
   
     <div class="container col-md-8">
         
-        <h1 class="text-center" style="margin-top: 40px; margin-bottom: 40px;">Add Category</h1>
+        <h1 class="text-center" style="margin-top: 40px; margin-bottom: 40px;">Edit Category</h1>
         
         <form method="post">
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="Category" name="addcategory">
+                
+                <%
+                    String categoryid=request.getParameter("id");
+                    String categoryname=request.getParameter("name");
+                %>
+              
+                <input type="text" class="form-control" value="<%=categoryname%>" name="newcategoryname">
+                <input type="hidden" class="form-control" value="<%=categoryid%>" name="newcategoryid">
             </div>
-            <button type="submit" class="btn btn-primary btn-lg btn-block" name="category">Add Category</button>
+            <button type="submit" class="btn btn-primary btn-lg btn-block" name="editcategory">Edit Category</button>
         </form>
         
     </div>
@@ -54,11 +60,12 @@
 </html>
 
 <%
-if(request.getParameter("category")!=null)
+if(request.getParameter("editcategory")!=null)
 {
-    String addcategory = request.getParameter("addcategory");
+    String id = request.getParameter("newcategoryid");
+    String name = request.getParameter("newcategoryname");
     dbquery db = new dbquery();
-    int i = db.add_category(addcategory);
+    int i = db.edit_category(id, name);
     if(i>0){
                 response.sendRedirect("viewCategory.jsp");
            }

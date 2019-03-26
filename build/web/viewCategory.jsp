@@ -7,7 +7,16 @@
 <%@page import="java.sql.ResultSet"%>
 <%@page import="dbpackage.dbquery"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+  <%
+  response.setHeader("Cache-Control","no-cache");
+  response.setHeader("Cache-Control","no-store");
+  response.setHeader("Pragma","no-cache");
+  response.setDateHeader ("Expires", 0);
 
+  if(session.getAttribute("lid")==null)
+      response.sendRedirect("index.jsp");
+
+  %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -53,8 +62,8 @@
                     
                     <th><%= i++ %></th>
                     <td><%= res.getString("categoryname") %></td>
-                    <td><button class="btn btn-primary"><a href=""></a>Edit Category</button></td>
-                    <td><button class="btn btn-warning"><a href=""></a>Delete Category</button></button></td>
+                    <td><a href="edit_category.jsp?id=<%= res.getString("categoryid") %>&name=<%=res.getString("categoryname")%>"><button class="btn btn-primary">Edit Category</button></a></td>
+                    <td><a href="delete_category.jsp?id=<%= res.getString("categoryid") %>"><button class="btn btn-warning">Delete Category</button></a></td>
                 </tr>
                 
                 <% } %>

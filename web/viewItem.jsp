@@ -7,6 +7,16 @@
 <%@page import="java.sql.ResultSet"%>
 <%@page import="dbpackage.dbquery"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+  <%
+  response.setHeader("Cache-Control","no-cache");
+  response.setHeader("Cache-Control","no-store");
+  response.setHeader("Pragma","no-cache");
+  response.setDateHeader ("Expires", 0);
+
+  if(session.getAttribute("lid")==null)
+      response.sendRedirect("index.jsp");
+
+  %>
 
 <!doctype html>
 <html lang="en">
@@ -21,7 +31,7 @@
     <nav class="navbar navbar-dark bg-dark">
         <a class="navbar-brand" href="dashboard.jsp">AR Furniture Shop</a>
         <a style="text-decoration: none;" href="addItem.jsp">
-            <button class="btn btn-danger">Add Item</button>
+            <button class="btn btn-success">Add Item</button>
         </a>
     </nav>
     
@@ -29,18 +39,6 @@
         
         <h1 style="margin-top: 2%; margin-bottom: 2%;" class="text-center">View Items</h1>
         
-        <!--        Delete Button and Add Button-->
-        <div class="row" style="margin-bottom: 20px">
-            <div class="col-6">
-                <button type="button" class="btn btn-danger btn-block btn-lg">Delete Item</button>
-            </div>
-            
-            <div class="col-6">
-                <a style="text-decoration: none;" href="addItem.jsp">
-                    <button type="button" class="btn btn-success btn-block btn-lg">Add Item</button>
-                </a>
-            </div>  
-        </div>
         
         <!--        Table-->
         <table class="table table-hover">
@@ -93,7 +91,9 @@
                     </td>
                     <td>
                         <div class="input-group">
-                            <input type="checkbox" style="height:25px;width:25px;">
+                            <a style="text-decoration: none;" href="delete_item.jsp?id=<%= res.getString("itemid") %>">
+                                <button type="button" class="btn btn-danger">Delete Item</button>
+                            </a>
                         </div>
                     </td>
                 </tr>

@@ -61,6 +61,7 @@ if(request.getParameter("signin")!=null)
     if(res.next())
     {
         String lid = res.getString("loginid");
+        session.setAttribute("lid", lid);
         String type = res.getString("usertype");
         if(type.equalsIgnoreCase("admin"))
         {

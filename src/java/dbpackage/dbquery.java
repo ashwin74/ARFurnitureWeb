@@ -148,4 +148,37 @@ public class dbquery {
         return rs;
     }
     
+    /** DELETE ITEM **/
+    public int delete_item(String itemid)
+    {
+        int i=0;
+        try {
+            i=st1.executeUpdate("DELETE FROM item WHERE itemid ='"+itemid+"'");
+        } catch (Exception e) {
+        }
+        return i;
+    }
+    
+    /** DELETE CATEGORY **/
+    public int delete_category(String categoryid)
+    {
+        int i=0;
+        try {
+            i=st1.executeUpdate("DELETE FROM category WHERE categoryid ='"+categoryid+"'");
+        } catch (Exception e) {
+        }
+        return i;
+    }
+    
+    /** EDIT CATEGORY **/
+    public int edit_category(String categoryid, String categoryname)
+    {
+        int i=0;
+        try {
+            i=st1.executeUpdate("UPDATE category SET categoryname = '"+categoryname+"' WHERE categoryid = '"+categoryid+"'");
+        } catch (Exception e) {
+        }
+        return i;
+    }
+    
 }

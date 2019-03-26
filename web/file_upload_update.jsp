@@ -12,7 +12,16 @@
 <%@page import="org.apache.commons.fileupload.FileItemIterator"%>
 <%@page import="org.apache.commons.fileupload.servlet.ServletFileUpload"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+  <%
+  response.setHeader("Cache-Control","no-cache");
+  response.setHeader("Cache-Control","no-store");
+  response.setHeader("Pragma","no-cache");
+  response.setDateHeader ("Expires", 0);
 
+  if(session.getAttribute("lid")==null)
+      response.sendRedirect("index.jsp");
+
+  %>
 <%
 ServletFileUpload upload=new ServletFileUpload();
 FileItemIterator iter=null;
