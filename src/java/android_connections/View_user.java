@@ -20,8 +20,8 @@ import org.json.simple.JSONObject;
  *
  * @author Ashwin
  */
-@WebServlet(name = "Login", urlPatterns = {"/Login"})
-public class Login extends HttpServlet {
+@WebServlet(name = "View_user", urlPatterns = {"/View_user"})
+public class View_user extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,10 +40,10 @@ public class Login extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Login</title>");            
+            out.println("<title>Servlet View_user</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Login at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet View_user at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -63,21 +63,23 @@ public class Login extends HttpServlet {
             throws ServletException, IOException {
             JSONObject json = new JSONObject();
             try {
-            String uname = request.getParameter("username");
-            String pwd = request.getParameter("password");
-                dbquery db = new dbquery();
-                ResultSet rs = db.userLogin(uname, pwd);
-                if(rs.next())
-                {
-                    json.put("status", "1");
-                    json.put("lid",rs.getString("loginid"));
-                }
-                else
-                {
-                    json.put("status", "0");
-                }
+            String lid = request.getParameter("lid");
+            dbquery db = new dbquery();
+            ResultSet rs = db.user_view(lid);
+            if(rs.next())
+            {
+                json.put("Status", "1");
+                json.put("fname",rs.getString("firstname"));
+                json.put("lname",rs.getString("lastname"));
+                json.put("phone",rs.getString("mobileno"));
+                json.put("house",rs.getString("housename"));
+                json.put("city",rs.getString("city"));
+                json.put("state",rs.getString("state"));
+                json.put("zip",rs.getString("zipcode"));
+            } else {
+                json.put("Status", "0");
+            }
         } catch (Exception e) {
-                System.err.println(e.toString());
         }
             response.getWriter().write(json.toString());
     }
@@ -93,9 +95,7 @@ public class Login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
-        
-        
+        processRequest(request, response);
     }
 
     /**

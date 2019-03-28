@@ -8,20 +8,16 @@ package android_connections;
 import dbpackage.dbquery;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.ResultSet;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.json.simple.JSONObject;
 
 /**
  *
  * @author Ashwin
  */
-@WebServlet(name = "Login", urlPatterns = {"/Login"})
-public class Login extends HttpServlet {
+public class EditUserAccount extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,10 +36,10 @@ public class Login extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Login</title>");            
+            out.println("<title>Servlet EditUserAccount</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Login at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet EditUserAccount at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -61,21 +57,19 @@ public class Login extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            JSONObject json = new JSONObject();
-            try {
-            String uname = request.getParameter("username");
-            String pwd = request.getParameter("password");
-                dbquery db = new dbquery();
-                ResultSet rs = db.userLogin(uname, pwd);
-                if(rs.next())
-                {
-                    json.put("status", "1");
-                    json.put("lid",rs.getString("loginid"));
-                }
-                else
-                {
-                    json.put("status", "0");
-                }
+        try {
+            String lid = request.getParameter("loginid");
+            String fname = request.getParameter("fname");
+            String lname = request.getParameter("lname");
+            String phone = request.getParameter("phone");
+            String house = request.getParameter("house");
+            String city = request.getParameter("city");
+            String state = request.getParameter("state");
+            String zip = request.getParameter("zip");
+            dbquery db = new dbquery();
+            int i = db.edit_user_account(fname, lname, phone, house, city, state, zip, lid);
+                
+            
         } catch (Exception e) {
                 System.err.println(e.toString());
         }
@@ -93,9 +87,7 @@ public class Login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
-        
-        
+        processRequest(request, response);
     }
 
     /**

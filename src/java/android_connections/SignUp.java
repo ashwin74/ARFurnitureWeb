@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,8 +19,7 @@ import org.json.simple.JSONObject;
  *
  * @author Ashwin
  */
-@WebServlet(name = "Login", urlPatterns = {"/Login"})
-public class Login extends HttpServlet {
+public class SignUp extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,10 +38,10 @@ public class Login extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Login</title>");            
+            out.println("<title>Servlet SignUp</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Login at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet SignUp at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -63,14 +61,16 @@ public class Login extends HttpServlet {
             throws ServletException, IOException {
             JSONObject json = new JSONObject();
             try {
-            String uname = request.getParameter("username");
-            String pwd = request.getParameter("password");
+            String fname = request.getParameter("fname");
+            String lname = request.getParameter("lname");
+            String email = request.getParameter("email");
+            String password = request.getParameter("password");
+            String phone = request.getParameter("phone");
                 dbquery db = new dbquery();
-                ResultSet rs = db.userLogin(uname, pwd);
-                if(rs.next())
+                int i = db.sign_up(fname, lname, email, password, phone);
+                if(i>0)
                 {
                     json.put("status", "1");
-                    json.put("lid",rs.getString("loginid"));
                 }
                 else
                 {
@@ -93,9 +93,7 @@ public class Login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
-        
-        
+        processRequest(request, response);
     }
 
     /**

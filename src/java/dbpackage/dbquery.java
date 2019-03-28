@@ -18,14 +18,14 @@ import java.sql.Statement;
 
 public class dbquery {
     ResultSet rs;
-    Statement st1;
+    Statement st1,st2;
     public dbquery()
     {
         try {
             dbconnection db=new dbconnection();
             Connection con=db.getc();
             st1=con.createStatement();
-            
+            st2=con.createStatement();
         } catch (Exception e) {
         }
     }
@@ -181,4 +181,53 @@ public class dbquery {
         return i;
     }
     
+    
+    /** VIEW USER LOGIN DETAILS **/
+    public ResultSet userLogin(String username, String userkey)
+    {
+        try {
+            rs=st1.executeQuery("SELECT * FROM login WHERE username = '"+username+"' AND userkey='"+userkey+"' AND usertype='user'");
+        } catch (Exception e) {
+        }
+        return rs;
+    }
+    
+    /** SIGN UP **/
+    public int sign_up(String fname, String lname,String email, String password, String phone)
+    {
+        int i=0;
+        String lid="";
+        try {
+             st2.executeUpdate("INSERT INTO `login`(username, userkey, usertype) VALUES('"+email+"','"+password+"', 'user') ");
+             rs=st1.executeQuery("SELECT MAX(`loginid`) FROM `login`");
+             if(rs.next())
+             {
+              lid=rs.getString(1);
+             }
+             i=st1.executeUpdate("INSERT INTO `userdetails`(loginid, firstname, lastname, email, mobileno) VALUES('"+lid+"','"+fname+"','"+lname+"', '"+email+"' ,'"+phone+"');");
+        } catch (Exception e) {
+            System.err.println(e.toString());
+        }
+        return i;
+    }
+    
+    /** ADD ITEM **/
+    public int edit_user_account(String fname, String lname,String phone, String house, String city, String state, int zip, String lid)
+    {
+        int i=0;
+        try {
+             i=st1.executeUpdate("UPDATE userdetails SET firstname='"+fname+"', lastname='"+lname+"', mobileno='"+phone+"', housename='"+house+"', city='"+city+"', state='"+state+"', zipcode='"+zip+"' WHERE loginid='"+lid+"'");
+        } catch (Exception e) {
+            System.err.println(e.toString());
+        }
+        return i;
+    }
+    public ResultSet user_view(String lid)
+    {
+        try {
+            rs=st1.executeQuery("SELECT * FROM userdetails WHERE loginid = '"+lid+"'");
+        } catch (Exception e) {
+        }
+        return rs;
+    }
 }
