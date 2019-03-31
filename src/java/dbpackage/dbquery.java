@@ -182,7 +182,7 @@ public class dbquery {
     }
     
     
-    /** VIEW USER LOGIN DETAILS **/
+    /** VIEW USER LOGIN DETAILS FROM APP**/
     public ResultSet userLogin(String username, String userkey)
     {
         try {
@@ -192,7 +192,7 @@ public class dbquery {
         return rs;
     }
     
-    /** SIGN UP **/
+    /** SIGN UP FROM APP**/
     public int sign_up(String fname, String lname,String email, String password, String phone)
     {
         int i=0;
@@ -211,8 +211,8 @@ public class dbquery {
         return i;
     }
     
-    /** ADD ITEM **/
-    public int edit_user_account(String fname, String lname,String phone, String house, String city, String state, int zip, String lid)
+    /** EDIT USER PROFILE FROM APP **/
+    public int edit_user_account(String fname, String lname,String phone, String house, String city, String state, String zip, String lid)
     {
         int i=0;
         try {
@@ -222,10 +222,32 @@ public class dbquery {
         }
         return i;
     }
+    
+    /** VIEW USER PROFILE FROM APP **/
     public ResultSet user_view(String lid)
     {
         try {
             rs=st1.executeQuery("SELECT * FROM userdetails WHERE loginid = '"+lid+"'");
+        } catch (Exception e) {
+        }
+        return rs;
+    }
+    
+    /** VIEW PRODUCTS IN APP **/
+    public ResultSet view_products()
+    {
+        try {
+            rs=st1.executeQuery("SELECT * FROM ITEM");
+        } catch (Exception e) {
+        }
+        return rs;
+    }
+    
+    /** VIEW PRODUCTS IN APP **/
+    public ResultSet view_product_details()
+    {
+        try {
+            rs=st1.executeQuery("SELECT * FROM ITEM, CATEGORY, REVIEW USERDETAILS");
         } catch (Exception e) {
         }
         return rs;
