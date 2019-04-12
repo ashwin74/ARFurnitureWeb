@@ -13,6 +13,10 @@
         <servlet-class>android_connections.Products</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>Review</servlet-name>
+        <servlet-class>android_connections.Review</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>ProductDetail</servlet-name>
         <servlet-class>android_connections.ProductDetail</servlet-class>
     </servlet>
@@ -27,6 +31,10 @@
     <servlet-mapping>
         <servlet-name>Products</servlet-name>
         <url-pattern>/Products</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Review</servlet-name>
+        <url-pattern>/Review</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ProductDetail</servlet-name>

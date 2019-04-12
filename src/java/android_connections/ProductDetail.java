@@ -60,36 +60,37 @@ public class ProductDetail extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
             JSONObject json = new JSONObject();
             try {
+                String id=request.getParameter("id");
                 dbquery db = new dbquery();
-                ResultSet rs = db.view_product_details();
+                ResultSet rs = db.view_products_detail(id);
                 JSONArray array = new JSONArray();
-                
                 if(rs.next()){
                     
                     json.put("status", "1");
-                    json.put("itemname",rs.getString("itemname"));
-                            json.put("itemid",rs.getString("itemid"));
-                            json.put("itemprice",rs.getString("itemprice"));
-                            json.put("itemdescription",rs.getString("itemdescription"));
-                            json.put("itemurl",rs.getString("itemurl"));
-                            array.add(json);
-                    do {
+                    do
+                    {
                         JSONObject json1 = new JSONObject();
-                        json.put("itemid",rs.getString("itemid"));
-                        json.put("itemprice",rs.getString("itemprice"));
-                        json.put("itemdescription",rs.getString("itemdescription"));
-                        json.put("itemurl",rs.getString("itemurl"));
-                        array.add(json);
-                    } while (rs.next());  
+
+                            json1.put("firstname",rs.getString("firstname"));
+                            json1.put("postdate",rs.getString("postdate"));
+                            json1.put("review",rs.getString("review"));
+                            json1.put("rating",rs.getString("rating"));
+                            
+                           
+                            array.add(json1);
+                    }while (rs.next());  
                     json.put("data", array);
                 }else{
                     json.put("status", "0");
                 }
             } catch (Exception e) {
+                System.err.println(e.toString());
         }
             response.getWriter().write(json.toString());
+        
     }
 
     /**

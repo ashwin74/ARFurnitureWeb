@@ -237,19 +237,31 @@ public class dbquery {
     public ResultSet view_products()
     {
         try {
-            rs=st1.executeQuery("SELECT * FROM ITEM");
+            rs=st1.executeQuery("SELECT item.*,`category`.`categoryname`FROM ITEM, CATEGORY WHERE item.`categoryid`=`category`.`categoryid` ");
         } catch (Exception e) {
         }
         return rs;
     }
     
-    /** VIEW PRODUCTS IN APP **/
-    public ResultSet view_product_details()
+    /** VIEW PRODUCT DETAIL IN APP **/
+    public ResultSet view_products_detail(String id)
     {
         try {
-            rs=st1.executeQuery("SELECT * FROM ITEM, CATEGORY, REVIEW USERDETAILS");
+            rs=st1.executeQuery("SELECT `review`.*,`userdetails`.`firstname` FROM `review`,`userdetails` WHERE `review`.`userid`=`userdetails`.`loginid` AND `review`.`itemid`='"+id+"'");
         } catch (Exception e) {
         }
         return rs;
+    }
+    
+    /** ADD REVIEW **/
+    public int add_review(String lid, String itemid, String review, String rating)
+    {
+        int i=0;
+        try {
+             i=st1.executeUpdate("INSERT INTO review(userid, itemid, postdate, review, rating) VALUES ('"+lid+"', '"+itemid+"', CURDATE(), '"+review+"', '"+rating+"')");
+        } catch (Exception e) {
+            System.err.println(e.toString());
+        }
+        return i;
     }
 }
