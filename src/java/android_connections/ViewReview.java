@@ -20,7 +20,7 @@ import org.json.simple.JSONObject;
  *
  * @author Ashwin
  */
-public class ProductDetail extends HttpServlet {
+public class ViewReview extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,10 +39,10 @@ public class ProductDetail extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ProductDetail</title>");            
+            out.println("<title>Servlet ViewReview</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ProductDetail at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ViewReview at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -61,11 +61,11 @@ public class ProductDetail extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-            JSONObject json = new JSONObject();
+        JSONObject json = new JSONObject();
             try {
                 String id=request.getParameter("id");
                 dbquery db = new dbquery();
-                ResultSet rs = db.view_products_detail(id);
+                ResultSet rs = db.view_review(id);
                 JSONArray array = new JSONArray();
                 if(rs.next()){
                     
@@ -79,7 +79,6 @@ public class ProductDetail extends HttpServlet {
                             json1.put("review",rs.getString("review"));
                             json1.put("rating",rs.getString("rating"));
                             
-                           
                             array.add(json1);
                     }while (rs.next());  
                     json.put("data", array);

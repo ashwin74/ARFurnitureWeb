@@ -44,6 +44,18 @@ public class dbquery {
         return i;
     }
     
+    /** ADD CATEGORY **/
+    public int add_notify(String notify, String ulid)
+    {
+        int i=0;
+        try {
+             i=st1.executeUpdate("UPDATE `ordermaster` SET `notification`= '"+notify+"' WHERE `userid`='"+ulid+"'");
+        } catch (Exception e) {
+            System.err.println(e.toString());
+        }
+        return i;
+    }
+    
     /** ADD ITEM **/
     public int add_item(String itemname, String itemprice,String categoryid, String itemdescription, String itemurl)
     {
@@ -243,8 +255,8 @@ public class dbquery {
         return rs;
     }
     
-    /** VIEW PRODUCT DETAIL IN APP **/
-    public ResultSet view_products_detail(String id)
+    /** VIEW REVIEW IN APP **/
+    public ResultSet view_review(String id)
     {
         try {
             rs=st1.executeQuery("SELECT `review`.*,`userdetails`.`firstname` FROM `review`,`userdetails` WHERE `review`.`userid`=`userdetails`.`loginid` AND `review`.`itemid`='"+id+"'");
@@ -254,7 +266,7 @@ public class dbquery {
     }
     
     /** ADD REVIEW **/
-    public int add_review(String lid, String itemid, String review, String rating)
+    public int add_review(String review, String rating, String itemid, String lid)
     {
         int i=0;
         try {
@@ -263,5 +275,15 @@ public class dbquery {
             System.err.println(e.toString());
         }
         return i;
+    }
+    
+    /** VIEW REVIEW IN APP **/
+    public ResultSet view_cart(String lid, String id)
+    {
+        try {
+            rs=st1.executeQuery("");
+        } catch (Exception e) {
+        }
+        return rs;
     }
 }
