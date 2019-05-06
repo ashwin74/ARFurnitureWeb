@@ -25,8 +25,16 @@
         <servlet-class>android_connections.AddReview</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>Cart</servlet-name>
-        <servlet-class>android_connections.Cart</servlet-class>
+        <servlet-name>Notification</servlet-name>
+        <servlet-class>android_connections.Notification</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Order</servlet-name>
+        <servlet-class>android_connections.Order</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>OrderStatus</servlet-name>
+        <servlet-class>android_connections.OrderStatus</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>SignUp</servlet-name>
@@ -53,8 +61,16 @@
         <url-pattern>/AddReview</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>Cart</servlet-name>
-        <url-pattern>/Cart</url-pattern>
+        <servlet-name>Notification</servlet-name>
+        <url-pattern>/Notification</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Order</servlet-name>
+        <url-pattern>/Order</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrderStatus</servlet-name>
+        <url-pattern>/OrderStatus</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

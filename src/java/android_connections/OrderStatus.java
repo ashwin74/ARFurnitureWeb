@@ -20,7 +20,7 @@ import org.json.simple.JSONObject;
  *
  * @author Ashwin
  */
-public class Cart extends HttpServlet {
+public class OrderStatus extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,10 +39,10 @@ public class Cart extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Cart</title>");            
+            out.println("<title>Servlet OrderStatus</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Cart at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet OrderStatus at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,13 +60,14 @@ public class Cart extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-         JSONObject json = new JSONObject();
+       // processRequest(request, response);
+          
+        JSONObject json = new JSONObject();
             try {
-                String id=request.getParameter("id");
-                String lid=request.getParameter("lid");
+                String id=request.getParameter("lid");
+              // String id="3";
                 dbquery db = new dbquery();
-                ResultSet rs = db.view_cart(id, lid);
+                ResultSet rs = db.view_order_status(id);
                 JSONArray array = new JSONArray();
                 if(rs.next()){
                     
@@ -76,10 +77,10 @@ public class Cart extends HttpServlet {
                         JSONObject json1 = new JSONObject();
 
                             json1.put("itemname",rs.getString("itemname"));
+                            json1.put("itemquantity",rs.getString("itemquantity"));
                             json1.put("itemprice",rs.getString("itemprice"));
-                            json1.put("category",rs.getString("categoryname"));
-                            json1.put("itemurl",rs.getString("itemurl"));
-                            
+                            json1.put("orderstatus",rs.getString("orderstatus"));
+                      
                             array.add(json1);
                     }while (rs.next());  
                     json.put("data", array);
@@ -103,7 +104,7 @@ public class Cart extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+     
     }
 
     /**

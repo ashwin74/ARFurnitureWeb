@@ -245,6 +245,26 @@ public class dbquery {
         return rs;
     }
     
+    /** VIEW NOTIFICATION FROM APP **/
+    public ResultSet notification(String lid)
+    {
+        try {
+            rs=st1.executeQuery("SELECT `userid`, `orderdate`, `notification` FROM `ordermaster` WHERE `userid`= '"+lid+"'");
+        } catch (Exception e) {
+        }
+        return rs;
+    }
+    
+    /** VIEW ORDER DETAILS FROM APP **/
+    public ResultSet order_details(String lid)
+    {
+        try {
+            rs=st1.executeQuery("SELECT `firstname`,`housename`,`city`,`state`,`zipcode` FROM userdetails WHERE userid='"+lid+"'");
+        } catch (Exception e) {
+        }
+        return rs;
+    }
+    
     /** VIEW PRODUCTS IN APP **/
     public ResultSet view_products()
     {
@@ -265,6 +285,17 @@ public class dbquery {
         return rs;
     }
     
+    
+    /** VIEW ORDER STATUS IN APP **/
+    public ResultSet view_order_status(String id)
+    {
+        try {
+            rs=st1.executeQuery("SELECT itemname, itemprice,`orderslave`.`itemquantity`, `ordermaster`.`orderstatus` FROM item,`orderslave`,`ordermaster` WHERE `ordermaster`.`userid`='"+id+"' AND `ordermaster`.`ordermasterid`=`orderslave`.`ordermasterid` AND `orderslave`.`itemid`=`item`.`itemid`");
+        } catch (Exception e) {
+        }
+        return rs;
+    }
+    
     /** ADD REVIEW **/
     public int add_review(String review, String rating, String itemid, String lid)
     {
@@ -277,13 +308,4 @@ public class dbquery {
         return i;
     }
     
-    /** VIEW REVIEW IN APP **/
-    public ResultSet view_cart(String lid, String id)
-    {
-        try {
-            rs=st1.executeQuery("");
-        } catch (Exception e) {
-        }
-        return rs;
-    }
 }
