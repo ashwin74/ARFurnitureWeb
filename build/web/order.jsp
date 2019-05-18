@@ -46,6 +46,7 @@
                     <th scope="col">Order Status</th>
                     <th scope="col">More</th>
                     <th scope="col">Notification</th>
+                    <th scope="col">Status</th>
                 </tr>
             </thead>
             
@@ -73,6 +74,12 @@
                     <td>
                         <a href="notification.jsp?ulid=<%=res.getString("loginid")%>">
                             <button type="button" class="btn btn-info">Send Notification</button>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="userOrderStatus.jsp?mid=<%= res.getString("ordermaster.ordermasterid") %>&ulid=<%=res.getString("loginid")%>">
+                            <button type="button" class="btn btn-warning">Change Status</button>
                         </a>
                     </td>
                 </tr>

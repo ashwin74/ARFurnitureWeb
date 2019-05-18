@@ -47,19 +47,32 @@
                     <!-- Business Statistics from Database-->
                     <%
                         dbquery db=new dbquery();
-                        ResultSet res=db.view_business();
+                        ResultSet res=db.view_profit();
                         if(res.next())
                         {
                     %>
                     
                     <ul class="list-group list-group-flush">
                       <li class="list-group-item">Total Profit: Rupees <%= res.getString(1) %></li>
-                      <li class="list-group-item">Number of Items: <%= res.getString(2) %></li>
-                      <li class="list-group-item">Number of Customers: <%= res.getString(3) %></li>
-                      <li class="list-group-item">Number of Items Sold: <%= res.getString(4) %></li>
+                      <% } %>
+                      
+                      <%
+                        res=db.view_items();
+                        if(res.next())
+                        {
+                    %>
+                      <li class="list-group-item">Number of Items: <%= res.getString(1) %></li>
+                      <% } %>
+                      
+                      <%
+                        res=db.view_customers();
+                        if(res.next())
+                        {
+                    %>
+                      <li class="list-group-item">Number of Customers: <%= res.getString(1) %></li>
+                     <% } %> 
                     </ul>
                     
-                    <% } %>
                     
                 </div>
                 

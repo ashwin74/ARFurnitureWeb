@@ -56,6 +56,18 @@ public class dbquery {
         return i;
     }
     
+    /** ADD CATEGORY **/
+    public int change_status(String status, String ulid, String mid)
+    {
+        int i=0;
+        try {
+             i=st1.executeUpdate("UPDATE `ordermaster` SET `orderstatus`= '"+status+"' WHERE `userid`='"+ulid+"' AND `ordermasterid`='"+mid+"'");
+        } catch (Exception e) {
+            System.err.println(e.toString());
+        }
+        return i;
+    }
+    
     /** ADD ITEM **/
     public int add_item(String itemname, String itemprice,String categoryid, String itemdescription, String itemurl)
     {
@@ -111,14 +123,34 @@ public class dbquery {
     }
     
     /** VIEW BUSINESS STATISTICS **/
-    public ResultSet view_business()
+    public ResultSet view_profit()
     {
         try {
-            rs=st1.executeQuery("SELECT SUM(`ordermaster`.`totalprice`), COUNT(`item`.`itemid`), COUNT(`userdetails`.`userid`), COUNT(`ordermaster`.`orderstatus`) FROM `ordermaster`,`item`,`userdetails` WHERE `ordermaster`.`orderstatus`='Success'");
+            rs=st1.executeQuery("SELECT SUM(`totalprice`) FROM `ordermaster`");
         } catch (Exception e) {
         }
         return rs;
     }
+    
+    public ResultSet view_items()
+    {
+        try {
+            rs=st1.executeQuery("SELECT COUNT(`itemid`) FROM `item`");
+        } catch (Exception e) {
+        }
+        return rs;
+    }
+    
+    public ResultSet view_customers()
+    {
+        try {
+            rs=st1.executeQuery("SELECT count(`userid`) FROM `userdetails`");
+        } catch (Exception e) {
+        }
+        return rs;
+    }
+    
+    
     
     /** VIEW USER **/
     public ResultSet view_user()
@@ -302,6 +334,32 @@ public class dbquery {
         int i=0;
         try {
              i=st1.executeUpdate("INSERT INTO review(userid, itemid, postdate, review, rating) VALUES ('"+lid+"', '"+itemid+"', CURDATE(), '"+review+"', '"+rating+"')");
+        } catch (Exception e) {
+            System.err.println(e.toString());
+        }
+        return i;
+    }
+    
+    /** ADD REVIEW **/
+    public int order(String lid, String itemid, String card, String cvv, String quantity)
+    {
+        int i=0;
+        try {
+            int price=0;
+            rs=st1.executeQuery("SELECT `item`.`itemprice` FROM `item` WHERE `itemid`= '"+itemid+"'");
+            if(rs.next()){
+                price=rs.getInt(1);
+            }
+            int total = price * Integer.parseInt(quantity);
+            i=st1.executeUpdate("INSERT INTO `ordermaster`(`userid`, `orderdate`, `totalprice`) VALUES ('"+lid+"', CURDATE(), '"+total+"')");
+            
+            int masterid=0;
+            rs=st1.executeQuery("SELECT MAX(`ordermasterid`) FROM `ordermaster`");
+            if(rs.next()){
+                masterid=rs.getInt(1);
+            }
+            
+            i=st1.executeUpdate("INSERT INTO `orderslave`(`ordermasterid`, `itemid`, `itemquantity`) VALUES ('"+masterid+"', '"+itemid+"', '"+quantity+"')");
         } catch (Exception e) {
             System.err.println(e.toString());
         }
