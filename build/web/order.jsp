@@ -79,7 +79,7 @@
                     
                     <td>
                         <a href="userOrderStatus.jsp?mid=<%= res.getString("ordermaster.ordermasterid") %>&ulid=<%=res.getString("loginid")%>">
-                            <button type="button" class="btn btn-warning">Change Status</button>
+                            <button type="button" class="btn btn-success">Change Status</button>
                         </a>
                     </td>
                 </tr>

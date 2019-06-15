@@ -106,7 +106,7 @@ public class dbquery {
     public ResultSet view_review()
     {
         try {
-            rs=st1.executeQuery("SELECT `review`.*,`userdetails`.firstname,item.itemname FROM review,userdetails,item WHERE review.userid=userdetails.userid AND review.reviewid=item.itemid");
+            rs=st1.executeQuery("SELECT `review`.*,`userdetails`.firstname,item.itemname FROM review,userdetails,item WHERE review.userid=userdetails.loginid AND review.itemid=item.itemid");
         } catch (Exception e) {
         }
         return rs;
@@ -291,7 +291,7 @@ public class dbquery {
     public ResultSet order_details(String lid)
     {
         try {
-            rs=st1.executeQuery("SELECT `firstname`,`housename`,`city`,`state`,`zipcode` FROM userdetails WHERE userid='"+lid+"'");
+            rs=st1.executeQuery("SELECT `firstname`,`housename`,`city`,`state`,`zipcode` FROM userdetails WHERE loginid='"+lid+"'");
         } catch (Exception e) {
         }
         return rs;
